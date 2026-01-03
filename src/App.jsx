@@ -10,6 +10,7 @@ import axios from "axios";
 import { useEffect } from "react";
 import CourseDetail from "./Body/CourseDetail";
 import LessonDetails from "./Body/LessonDetails";
+import Enrolledcourse from "./Body/Enrolledcourse";
 function App() {
   const dispatch = useDispatch();   
 
@@ -57,6 +58,10 @@ function App() {
         {
           path:"course/lesson/:id",
           element:<LessonDetails></LessonDetails>
+        },
+        {
+          path:"enrolledcourse",
+          element:<Enrolledcourse></Enrolledcourse>
         }
       ],
     },
