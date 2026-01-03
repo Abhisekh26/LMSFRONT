@@ -8,6 +8,7 @@ import { useDispatch } from "react-redux";
 import { login } from "./DataStore/Slice/Authslice";
 import axios from "axios";
 import { useEffect } from "react";
+import CourseDetail from "./Body/CourseDetail";
 function App() {
   const dispatch = useDispatch();   
 
@@ -47,6 +48,10 @@ function App() {
         {
           path: "home",
           element: <Home></Home>,
+        },
+        {
+           path: "course/:id",
+           element: <CourseDetail></CourseDetail>,
         },
       ],
     },
