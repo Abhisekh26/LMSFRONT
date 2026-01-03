@@ -1,50 +1,54 @@
 
-
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { updateUser } from "../DataStore/Slice/Authslice"; 
 
 export default function Home() {
+  const dispatch = useDispatch();
   const auth = useSelector((state) => state.auth); 
   const [courses, setCourses] = useState([]);
-  const [enrolledCourses, setEnrolledCourses] = useState(auth.user?.EnrolledCourses || []);
 
+  
   useEffect(() => {
     fetchCourses();
   }, []);
 
   async function fetchCourses() {
     try {
-      const res = await axios.get("http://localhost:5500/course", { withCredentials: true });
+      const res = await axios.get("http://localhost:5500/course", {
+        withCredentials: true,
+      });
       setCourses(res.data);
     } catch (err) {
       console.log("Error fetching courses 👉", err.response?.data || err.message);
     }
   }
 
+  
   async function getEnrolled(courseId) {
     try {
       const res = await axios.post(
         `http://localhost:5500/enroll/${courseId}`,
-        {}, 
+        {},
         { withCredentials: true }
       );
 
       if (res.status === 200) {
-        
-        setEnrolledCourses((prev) => [...prev, courseId]);
-        console.log("Enrolled in course");
+        //  Update Redux with updated user
+        dispatch(updateUser(res.data));
+        console.log("Enrolled in course ✅");
       }
     } catch (err) {
       console.log("Enrollment error 👉", err.response?.data || err.message);
-      alert(err.response?.data?.message || "Enrollment failed");
+      alert("Enrollment failed");
     }
   }
 
   return (
-    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 p-4">
       {courses.map((course) => {
-        const isEnrolled = enrolledCourses.includes(course._id);
+        const isEnrolled = auth.user?.EnrolledCourses?.includes(course._id);
 
         return (
           <div
@@ -87,4 +91,3 @@ export default function Home() {
     </div>
   );
 }
- 
