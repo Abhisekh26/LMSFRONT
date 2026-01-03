@@ -9,6 +9,7 @@ import { login } from "./DataStore/Slice/Authslice";
 import axios from "axios";
 import { useEffect } from "react";
 import CourseDetail from "./Body/CourseDetail";
+import LessonDetails from "./Body/LessonDetails";
 function App() {
   const dispatch = useDispatch();   
 
@@ -53,6 +54,10 @@ function App() {
            path: "course/:id",
            element: <CourseDetail></CourseDetail>,
         },
+        {
+          path:"course/lesson/:id",
+          element:<LessonDetails></LessonDetails>
+        }
       ],
     },
   ]);
