@@ -32,12 +32,12 @@ export default function Navbar() {
       <ul
         tabIndex="-1"
         className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
-        <li><Link to="/navbar/home">Home</Link></li>
+        <li><Link to="/student/home">Home</Link></li>
         <li>
           <Link>Courses</Link>
           <ul className="p-2">                            
-            <li><Link to="/navbar/enrolledcourse">Enrolled</Link></li>
-            <li><Link to="navbar/allcourses">All Courses</Link></li>
+            <li><Link to="/student/enrolled">Enrolled</Link></li>
+            <li><Link to="/student/allcourses">All Courses</Link></li>
           </ul>
         </li>
         <li><Link>Profile</Link></li>
@@ -47,13 +47,13 @@ export default function Navbar() {
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1">
-      <li><Link to="/navbar/home">Home</Link></li>
+      <li><Link to="/student/home">Home</Link></li>
       <li>
         <details>
           <summary>Courses</summary>
           <ul className="p-2 bg-base-100 w-40 z-1"> 
-            <li><Link to="/navbar/enrolledcourse">Enrolled</Link></li>
-            <li><Link to="navbar/allcourses">All Courses</Link></li>
+            <li><Link to="/student/enrolled">Enrolled</Link></li>
+            <li><Link to="/student/allcourses">All Courses</Link></li>
            </ul>
         </details>
       </li>
@@ -65,7 +65,7 @@ export default function Navbar() {
   </div>
 </div>
 <div>
-  <Outlet></Outlet>
+  {/* <Outlet></Outlet> */}
 </div>
 </>
   )

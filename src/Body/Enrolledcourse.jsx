@@ -44,7 +44,7 @@ export default function Enrolledcourse() {
           <div
             key={course._id}
             className="card bg-red-100 shadow-lg hover:shadow-xl cursor-pointer transition-shadow duration-300"
-            onClick={() => navigate(`/navbar/course/${course._id}`)}
+            onClick={() => navigate(`/student/course/${course._id}`)}
           >
             <div className="card-body">
               <h2 className="card-title text-lg font-semibold">{course.name}</h2>

@@ -24,7 +24,14 @@ export default function Login() {
      if(user.status === 200){
       console.log(user)
       dispatch(login(user.data))
-      navigate("/navbar")
+      // navigate("/navbar")
+      // navigate("/student/home")
+       if (user.data.user.occupation === "Teacher") {
+        console.log("teacher")
+        navigate("/teacher");
+      } else {
+        navigate("/student/home");
+      }
      
      }
     } catch (err) {

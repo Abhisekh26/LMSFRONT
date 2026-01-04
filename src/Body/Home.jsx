@@ -52,7 +52,7 @@ export default function Home() {
         return (
           <div
             key={course._id}
-            onClick={() => navigate(`/navbar/course/${course._id}`)}
+            onClick={() => navigate(`/student/course/${course._id}`)}
             className="card bg-red-100 shadow-lg hover:shadow-xl transition-shadow duration-300 cursor-pointer"
           >
             <div className="card-body">

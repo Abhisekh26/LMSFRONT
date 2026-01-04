@@ -75,7 +75,7 @@ export default function CourseDetail() {
                 className="flex items-center justify-between p-4 border rounded-lg cursor-pointer
                            hover:bg-base-200 transition"
                 onClick={() => {
-                  navigate(`/navbar/course/lesson/${lesson._id}`)
+                  navigate(`/student/course/lesson/${lesson._id}`)
                   console.log("Clicked lesson:", lesson._id);
                 }}
               >
