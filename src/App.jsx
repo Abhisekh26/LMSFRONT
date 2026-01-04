@@ -26,6 +26,7 @@ import Teacherlayout from "./Layout/Teacherlayout";
 import Teacherdashboard from "./Body/Teacher/Teacherdashboard";
 import Mycourses from "./Body/Teacher/Mycourses";
 import Teachercourselesson from "./Body/Teacher/Teachercourselesson";
+import Teacherlessondetail from "./Body/Teacher/Teacherlessondetail";
 
 
 
@@ -79,6 +80,7 @@ function App() {
          { index: true, element: <Teacherdashboard></Teacherdashboard> },
            { path: "courses", element: <Mycourses></Mycourses> },
             { path: "course/:id", element: <Teachercourselesson></Teachercourselesson> },
+            {path:"lesson/:id",element:<Teacherlessondetail></Teacherlessondetail>}
       //   { path: "create-course", element: <CreateCourse /> },
        ],
     },
