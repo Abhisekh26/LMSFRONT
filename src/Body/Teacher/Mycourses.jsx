@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -23,16 +24,34 @@ export default function MyCourses() {
         <div
           key={course._id}
           onClick={() => navigate(`/teacher/course/${course._id}`)}
-          className="card bg-red-200 shadow cursor-pointer hover:shadow-lg transition"
+          className="card bg-red-100 shadow-md cursor-pointer hover:shadow-xl transition duration-300"
         >
-          <div className="card-body">
+          {/* 🔹 Thumbnail */}
+          <figure className="h-40 overflow-hidden">
+            <img
+              src={course.thumbnail}
+              alt={course.name}
+              className="w-full h-full object-cover"
+            />
+          </figure>
+
+          {/* 🔹 Content */}
+          <div className="card-body space-y-1">
             <h2 className="card-title">{course.name}</h2>
+
             <p className="text-sm text-base-content/70">
               Level: {course.level}
             </p>
-            <span className="badge badge-outline capitalize w-fit">
-              {course.status}
-            </span>
+
+            <div className="flex justify-between items-center">
+              <span className="badge badge-outline capitalize">
+                {course.status}
+              </span>
+
+              <span className="text-sm font-semibold">
+                ₹ {course.price}
+              </span>
+            </div>
           </div>
         </div>
       ))}

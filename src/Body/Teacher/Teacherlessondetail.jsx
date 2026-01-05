@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -24,6 +25,14 @@ export default function Teacherlessondetail() {
 
   if (!lesson) return <p className="text-center mt-10">Loading...</p>;
 
+  // pick best available video
+  const videoUrl =
+    lesson.video?.sources?.["720p"] ||
+    lesson.video?.sources?.["360p"];
+
+  // detect youtube embed
+  const isYouTube = videoUrl?.includes("youtube.com/embed");
+
   return (
     <div className="max-w-4xl mx-auto p-6">
       <div className="card bg-base-100 shadow-lg">
@@ -44,16 +53,28 @@ export default function Teacherlessondetail() {
 
           <div className="divider"></div>
 
-          {/* Video */}
-          {lesson.lessonType === "video" && lesson.video?.sources && (
-            <video
-              controls
-              className="w-full h-[400px] rounded"
-              src={lesson.video.sources["720p"] || lesson.video.sources["360p"]}
-            />
+          {/* 🎥 VIDEO */}
+          {lesson.lessonType === "video" && videoUrl && (
+            <>
+              {isYouTube ? (
+                <iframe
+                  src={videoUrl}
+                  className="w-full h-[400px] rounded"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                  title="Video Lesson"
+                />
+              ) : (
+                <video
+                  controls
+                  className="w-full h-[400px] rounded"
+                  src={videoUrl}
+                />
+              )}
+            </>
           )}
 
-          {/* PDF */}
+          {/* 📄 PDF */}
           {lesson.lessonType === "pdf" && lesson.pdf?.fileUrl && (
             <iframe
               src={lesson.pdf.fileUrl}
@@ -62,13 +83,27 @@ export default function Teacherlessondetail() {
             />
           )}
 
-          {/* Live */}
-          {lesson.lessonType === "live" && (
+          {/* 🔴 LIVE */}
+          {lesson.lessonType === "live" && lesson.live && (
             <p className="text-gray-600">
-              Live class: {new Date(lesson.live.startTime).toLocaleString()} -{" "}
-              {new Date(lesson.live.endTime).toLocaleString()}
+              Live class:
               <br />
-              Link: <a href={lesson.live.meetingLink} className="text-blue-500">{lesson.live.meetingLink}</a>
+              {lesson.live.startTime && (
+                <>
+                  {new Date(lesson.live.startTime).toLocaleString()} –{" "}
+                  {new Date(lesson.live.endTime).toLocaleString()}
+                </>
+              )}
+              <br />
+              Link:{" "}
+              <a
+                href={lesson.live.meetingLink}
+                target="_blank"
+                rel="noreferrer"
+                className="text-blue-500 underline"
+              >
+                Join Meeting
+              </a>
             </p>
           )}
         </div>
