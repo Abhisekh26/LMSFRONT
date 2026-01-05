@@ -5,7 +5,7 @@ import axios from "axios";
 import { useSelector } from "react-redux";
 
 export default function Teacherdashboard() {
-  const auth = useSelector(state => state.auth);
+  const auth = useSelector((state) => state.auth);
 
   const [stats, setStats] = useState({
     courses: 0,
@@ -28,7 +28,7 @@ export default function Teacherdashboard() {
     let students = 0;
     let revenue = 0;
 
-    res.data.forEach(course => {
+    res.data.forEach((course) => {
       const count = course.enrolledStudents?.length || 0;
       students += count;
       revenue += count * course.price;
@@ -47,7 +47,7 @@ export default function Teacherdashboard() {
     });
 
     const filtered = res.data.filter(
-      course => course.createdBy._id !== auth.user._id
+      (course) => course.createdBy._id !== auth.user._id
     );
 
     setOtherCourses(filtered);
@@ -88,7 +88,7 @@ export default function Teacherdashboard() {
         </div>
       </div>
 
-      {/* Other Teachers Section */}
+      {/* Other Teachers Courses */}
       <div>
         <h2 className="text-2xl font-semibold mb-4">
           👀 See what other teachers are offering
@@ -97,32 +97,61 @@ export default function Teacherdashboard() {
         {otherCourses.length === 0 ? (
           <p className="text-base-content/60">No courses available</p>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {otherCourses.map(course => (
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {otherCourses.map((course) => (
               <div
                 key={course._id}
-                className="card bg-red-100 shadow hover:shadow-lg transition"
+                className="card bg-base-100 shadow-lg hover:shadow-xl transition cursor-pointer overflow-hidden"
               >
-                <div className="card-body">
-                  <h3 className="card-title">{course.name}</h3>
+                {/* 🖼️ Image */}
+                <div className="relative h-44 w-full">
+                  {course.thumbnail ? (
+                    <>
+                      <img
+                        src={course.thumbnail}
+                        alt={course.name}
+                        loading="lazy"
+                        className="w-full h-full object-cover"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent"></div>
+                    </>
+                  ) : (
+                    <div className="h-full flex items-center justify-center bg-base-200">
+                      <span className="text-sm text-base-content/60">
+                        No image available
+                      </span>
+                    </div>
+                  )}
 
-                  <p className="text-sm text-base-content/70">
-                    Level: {course.level}
+                  <h3 className="absolute bottom-3 left-3 right-3 text-white text-lg font-semibold line-clamp-2">
+                    {course.name}
+                  </h3>
+                </div>
+
+                <div className="card-body">
+                  <p className="text-sm text-base-content/70 line-clamp-2">
+                    {course.coursedescription || "No description provided."}
                   </p>
 
-                  <p className="text-sm">
-                    Instructor:{" "}
+                  <div className="flex flex-wrap gap-2 mt-2">
+                    <span className="badge badge-outline capitalize">
+                      {course.level}
+                    </span>
+                    <span className="badge badge-secondary">
+                      ₹ {course.price}
+                    </span>
+                    <span className="badge badge-info capitalize">
+                      {course.status}
+                    </span>
+                  </div>
+
+                  <p className="text-sm mt-3 text-base-content/80">
+                    👨‍🏫{" "}
                     <span className="font-medium">
                       {course.createdBy.firstName}{" "}
                       {course.createdBy.lastName}
                     </span>
                   </p>
-
-                  <div className="mt-3 flex justify-between items-center">
-                    <span className="badge badge-secondary">
-                      ₹ {course.price}
-                    </span>
-                  </div>
                 </div>
               </div>
             ))}
