@@ -4,8 +4,6 @@ import { useDispatch } from "react-redux";
 import { useEffect } from "react";
 import axios from "axios";
 import { login } from "./DataStore/Slice/Authslice";
-
-
 import Landing from "./Landing";
 import Login from "./Login";
 import Signup from "./Signup";
@@ -15,7 +13,7 @@ import Home from "./Body/Home";
 import CourseDetail from "./Body/CourseDetail";
 import LessonDetails from "./Body/LessonDetails";
 import Enrolledcourse from "./Body/Enrolledcourse";
-
+import StudentDashboard from "./Body/Studentdasboard";
 
 import RoleGuard from "./Roleguard/Roleguard";
 import StudentLayout from "./Layout/Studentlayout";
@@ -26,6 +24,7 @@ import Teachercourselesson from "./Body/Teacher/Teachercourselesson";
 import Teacherlessondetail from "./Body/Teacher/Teacherlessondetail";
 import Createcourse from "./Body/Teacher/Createcourse";
 import Addlesson from "./Body/Teacher/Addlesson";
+
 
 
 
@@ -64,6 +63,7 @@ function App() {
         { path: "course/:id", element: <CourseDetail /> },
         { path: "course/lesson/:id", element: <LessonDetails /> },
         { path: "enrolled", element: <Enrolledcourse /> },
+        {path:"dashboard", element:<StudentDashboard></StudentDashboard>}
       ],
     },
 

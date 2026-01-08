@@ -37,7 +37,7 @@ export default function Navbar() {
           <Link>Courses</Link>
           <ul className="p-2">                            
             <li><Link to="/student/enrolled">Enrolled</Link></li>
-            <li><Link to="/student/allcourses">All Courses</Link></li>
+            <li><Link to="/student/dashboard">Dashboard</Link></li>
           </ul>
         </li>
         <li><Link>Profile</Link></li>
@@ -53,7 +53,7 @@ export default function Navbar() {
           <summary>Courses</summary>
           <ul className="p-2 bg-base-100 w-40 z-1"> 
             <li><Link to="/student/enrolled">Enrolled</Link></li>
-            <li><Link to="/student/allcourses">All Courses</Link></li>
+            <li><Link to="/student/dashboard">Dashboard</Link></li>
            </ul>
         </details>
       </li>

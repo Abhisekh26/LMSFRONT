@@ -4,6 +4,7 @@ import { Outlet, Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { logout } from "../DataStore/Slice/Authslice";
+import Footer from "../Footer/Footer";
 
 export default function Teacherlayout() {
   const dispatch = useDispatch();
@@ -43,6 +44,7 @@ export default function Teacherlayout() {
       {/* 🔥 THIS IS REQUIRED */}
       <div className="p-6">
         <Outlet />
+      <Footer></Footer>
       </div>
     </>
   );
